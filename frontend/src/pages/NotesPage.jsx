@@ -92,25 +92,25 @@ export default function NotesPage() {
         <section className="card">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-2xl font-bold text-slate-900">📝 Your Notes</h1>
-              <p className="text-slate-600">Create, edit, and manage your notes within your tenant.</p>
+              <h1 className="text-2xl font-bold text-slate-900">My Notes</h1>
+              <p className="text-slate-600">Manage your team's notes and documents</p>
             </div>
             <div className="text-sm text-slate-500 bg-slate-100 px-3 py-2 rounded-lg border border-slate-200">
-              📊 {notes.length} notes
+              {notes.length} total
             </div>
           </div>
           
           {error && (
             <div className="mb-4 rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-700">
               <div className="flex items-start gap-2">
-                <span className="text-red-500 font-bold">⚠️</span>
+                <span className="text-red-500 font-bold">!</span>
                 <div className="flex-1">
-                  <p className="font-medium">Error</p>
+                  <p className="font-medium">Something went wrong</p>
                   <p>{error}</p>
                   {error.toLowerCase().includes('limit') && isAdmin && (
                     <div className="mt-3">
                       <button className="btn btn-primary text-sm" onClick={upgrade}>
-                        ⬆️ Upgrade to Pro
+                        Upgrade Plan
                       </button>
                     </div>
                   )}
@@ -121,7 +121,7 @@ export default function NotesPage() {
         </section>
 
         <section className="card">
-          <h2 className="text-lg font-semibold mb-4 text-slate-900">✨ Create New Note</h2>
+          <h2 className="text-lg font-semibold mb-4 text-slate-900">Add New Note</h2>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">Title</label>
@@ -129,7 +129,7 @@ export default function NotesPage() {
                 className="input" 
                 value={title} 
                 onChange={(e)=>setTitle(e.target.value)} 
-                placeholder="Enter note title..."
+                placeholder="What's this note about?"
               />
             </div>
             <div>
@@ -138,7 +138,7 @@ export default function NotesPage() {
                 className="input" 
                 value={content} 
                 onChange={(e)=>setContent(e.target.value)} 
-                placeholder="Enter note content..."
+                placeholder="Write your note here..."
               />
             </div>
           </div>
@@ -148,26 +148,26 @@ export default function NotesPage() {
               className="btn btn-primary" 
               onClick={createNote}
             >
-              {creating ? '⏳ Creating…' : '➕ Add Note'}
+              {creating ? 'Saving...' : 'Add Note'}
             </button>
           </div>
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-4 text-slate-900">📋 Notes List</h2>
+          <h2 className="text-lg font-semibold mb-4 text-slate-900">Recent Notes</h2>
           {loading ? (
             <div className="card text-center">
               <div className="animate-pulse">
                 <div className="h-4 bg-slate-300 rounded w-1/4 mx-auto"></div>
                 <div className="h-3 bg-slate-200 rounded w-1/2 mx-auto mt-2"></div>
               </div>
-              <p className="text-slate-600 mt-2">Loading notes...</p>
+              <p className="text-slate-600 mt-2">Loading your notes...</p>
             </div>
           ) : notes.length === 0 ? (
             <div className="card text-center">
               <div className="text-6xl mb-4">📝</div>
               <h3 className="text-lg font-medium text-slate-900 mb-2">No notes yet</h3>
-              <p className="text-slate-600">Create your first note to get started!</p>
+              <p className="text-slate-600">Start by creating your first note above</p>
             </div>
           ) : (
             <div className="grid gap-4">
@@ -193,21 +193,21 @@ function NoteItem({ note, onSave, onDelete }) {
         <div className="space-y-3">
           <div className="grid md:grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Title</label>
               <input 
                 className="input" 
                 value={title} 
                 onChange={(e)=>setTitle(e.target.value)}
-                placeholder="Note title..."
+                placeholder="Note title"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Content</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Content</label>
               <input 
                 className="input" 
                 value={content} 
                 onChange={(e)=>setContent(e.target.value)}
-                placeholder="Note content..."
+                placeholder="Note content"
               />
             </div>
           </div>
@@ -215,12 +215,12 @@ function NoteItem({ note, onSave, onDelete }) {
       ) : (
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
-            <h3 className="text-lg font-semibold text-gray-900 mb-1">{note.title}</h3>
-            <p className="text-gray-600 mb-2">{note.content}</p>
-            <div className="flex items-center gap-2 text-xs text-gray-400">
-              <span>📅 {new Date(note.createdAt).toLocaleDateString()}</span>
+            <h3 className="text-lg font-semibold text-slate-900 mb-1">{note.title}</h3>
+            <p className="text-slate-600 mb-2">{note.content}</p>
+            <div className="flex items-center gap-2 text-xs text-slate-400">
+              <span>{new Date(note.createdAt).toLocaleDateString()}</span>
               <span>•</span>
-              <span>⏰ {new Date(note.createdAt).toLocaleTimeString()}</span>
+              <span>{new Date(note.createdAt).toLocaleTimeString()}</span>
             </div>
           </div>
         </div>
@@ -234,13 +234,13 @@ function NoteItem({ note, onSave, onDelete }) {
                 className="btn btn-primary text-sm" 
                 onClick={()=>{ onSave(note._id, { title, content }); setEdit(false); }}
               >
-                💾 Save
+                Save Changes
               </button>
               <button 
                 className="btn btn-secondary text-sm" 
                 onClick={()=>{ setTitle(note.title); setContent(note.content); setEdit(false); }}
               >
-                ❌ Cancel
+                Cancel
               </button>
             </>
           ) : (
@@ -249,24 +249,24 @@ function NoteItem({ note, onSave, onDelete }) {
                 className="btn btn-secondary text-sm" 
                 onClick={()=>setEdit(true)}
               >
-                ✏️ Edit
+                Edit
               </button>
               <button 
                 className="btn btn-danger text-sm" 
                 onClick={()=>{
-                  if(confirm('Are you sure you want to delete this note?')) {
+                  if(confirm('Delete this note? This cannot be undone.')) {
                     onDelete(note._id);
                   }
                 }}
               >
-                🗑️ Delete
+                Delete
               </button>
             </>
           )}
         </div>
         {!edit && (
           <div className="text-xs text-slate-400">
-            ID: {note._id.slice(-6)}
+            #{note._id.slice(-6)}
           </div>
         )}
       </div>

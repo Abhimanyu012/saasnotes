@@ -34,7 +34,7 @@ export default function Navbar() {
       <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-6">
           <Link to="/" className="font-bold text-xl text-blue-900 hover:text-blue-800 transition-colors duration-200">
-            📝 Notes SaaS
+            Notes
           </Link>
           {isAuthed() && (
             <nav className="hidden sm:flex items-center gap-4 text-sm">
@@ -46,18 +46,18 @@ export default function Navbar() {
         </div>
         <div className="flex items-center gap-3">
           <span className={`badge ${status === 'ok' ? 'badge-success' : status === 'down' ? 'badge-error' : 'badge-default'}`}>
-            {status === 'ok' ? '✅ API: OK' : status === 'down' ? '❌ API: DOWN' : '⏳ API: …'}
+            {status === 'ok' ? 'Online' : status === 'down' ? 'Offline' : 'Checking...'}
           </span>
-          {plan && <span className="badge badge-info">Plan: {plan}</span>}
+          {plan && <span className="badge badge-info">{plan} Plan</span>}
           {isAuthed() ? (
             <div className="flex items-center gap-3">
               <span className="text-sm text-slate-600 hidden sm:block bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
                 {getTenantSlug()} • {role}
               </span>
-              <button className="btn btn-secondary" onClick={logout}>Logout</button>
+              <button className="btn btn-secondary" onClick={logout}>Sign Out</button>
             </div>
           ) : (
-            <Link className="btn btn-primary" to="/login">Login</Link>
+            <Link className="btn btn-primary" to="/login">Sign In</Link>
           )}
         </div>
       </div>

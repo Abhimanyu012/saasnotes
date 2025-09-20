@@ -1,20 +1,41 @@
-# Frontend
+# Notes App Frontend
 
-React + Vite + Tailwind for the Notes SaaS demo.
+A clean, modern notes application built with React and Tailwind CSS.
 
-- Auth: POST /api/auth/login, stores JWT in localStorage
-- Notes: CRUD at /api/notes (JWT required)
-- Tenant: Admins can POST /api/tenants/:slug/upgrade to lift note limit
+## Features
 
-Quickstart
+- User authentication with workspace isolation
+- Create, edit, and delete notes
+- Responsive design
+- Real-time API status monitoring
+- Team plan management
 
-1. Run the backend on port 5000, or set VITE_API_BASE to your API.
-2. Seed test data once: open the Login page and click "Seed Accounts".
-3. Start dev server.
+## Getting Started
 
-Environment
+1. Make sure the backend server is running (usually on port 5000)
+2. Install dependencies: `npm install`
+3. Start the development server: `npm run dev`
+4. Open your browser to the localhost URL shown in terminal
 
-- VITE_API_BASE (optional). Defaults to "/api" and uses Vite proxy when configured.
+## Demo Setup
+
+Use the "Setup Demo Data" button on the login page to create test accounts:
+
+**Acme Corp Team:**
+- admin@acme.test / password (admin access)
+- user@acme.test / password (standard user)
+
+**Globex Inc Team:**
+- admin@globex.test / password (admin access) 
+- user@globex.test / password (standard user)
+
+## Configuration
+
+The app automatically proxies API calls to the backend. If your backend runs on a different port, update the proxy settings in `vite.config.js`.
+
+## Build
+
+Run `npm run build` to create a production build in the `dist/` folder.
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

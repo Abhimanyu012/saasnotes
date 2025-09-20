@@ -1,31 +1,52 @@
 # Dependencies
 node_modules/
 */node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Environment variables
+# Environment variables (CRITICAL - NEVER COMMIT)
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+*/.env
+*/.env.local
 
 # Build outputs
 dist/
 build/
+*/dist/
+*/build/
+out/
 
 # Logs
+logs/
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
 # Runtime data
-pids
+pids/
 *.pid
 *.seed
 *.pid.lock
 
-# Coverage directory used by tools like istanbul
+# Coverage directory
 coverage/
+*.lcov
+.nyc_output/
+
+# Cache directories
+.cache/
+.parcel-cache/
+.vite/
 
 # OS generated files
 .DS_Store
@@ -35,6 +56,7 @@ coverage/
 .Trashes
 ehthumbs.db
 Thumbs.db
+Desktop.ini
 
 # IDE files
 .vscode/
@@ -42,7 +64,28 @@ Thumbs.db
 *.swp
 *.swo
 *~
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
 
 # Temporary files
 *.tmp
 *.temp
+
+# Deployment platforms
+.vercel/
+.netlify/
+.amplifyrc
+amplify/
+
+# Package manager files
+.yarn-integrity
+.npm/
+.eslintcache
+
+# Project specific
+TODO.md
+NOTES.md
+.local/
+.config/

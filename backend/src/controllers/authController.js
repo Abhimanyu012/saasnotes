@@ -1,10 +1,7 @@
-// This file is already complete and does not require changes.
-const express = require('express');
 const bcrypt = require('bcryptjs');
 const { signJwt } = require('../utils/jwt');
 const User = require('../models/User');
 const Tenant = require('../models/Tenant');
-const router = express.Router();
 
 // Predefined users for testing
 const predefinedUsers = [
@@ -14,8 +11,10 @@ const predefinedUsers = [
   { email: 'user@globex.test', role: 'member', tenant: 'Globex' },
 ];
 
-// Seed tenants and users if not present
-router.get('/seed', async (req, res) => {
+/**
+ * Seed tenants and users if not present
+ */
+const seedData = async (req, res) => {
   try {
     for (const tName of ['Acme', 'Globex']) {
       let tenant = await Tenant.findOne({ name: tName });
@@ -34,22 +33,52 @@ router.get('/seed', async (req, res) => {
         }
       }
     }
-    res.json({ status: 'seeded' });
+    res.json({ status: 'seeded', message: 'Test accounts created successfully' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});
+};
 
-// Login
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ email });
-  if (!user) return res.status(400).json({ error: 'Invalid credentials' });
-  const match = await bcrypt.compare(password, user.password);
-  if (!match) return res.status(400).json({ error: 'Invalid credentials' });
-  const token = signJwt({ id: user._id });
-  const tenant = await Tenant.findById(user.tenantId);
-  res.json({ token, tenantSlug: tenant?.slug || '', role: user.role });
-});
+/**
+ * User login
+ */
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required' });
+    }
 
-module.exports = router;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid credentials' });
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      return res.status(400).json({ error: 'Invalid credentials' });
+    }
+
+    const token = signJwt({ id: user._id });
+    const tenant = await Tenant.findById(user.tenantId);
+    
+    res.json({ 
+      token, 
+      tenantSlug: tenant?.slug || '', 
+      role: user.role,
+      user: {
+        id: user._id,
+        email: user.email,
+        role: user.role
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+module.exports = {
+  seedData,
+  login
+};

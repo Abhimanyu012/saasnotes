@@ -5,7 +5,11 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "echo 'No build step required for Node.js'",
+    "test": "echo 'Tests not implemented yet'",
+    "lint": "eslint src/",
+    "format": "prettier --write src/"
   },
   "dependencies": {
     "express": "^4.18.2",

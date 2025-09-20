@@ -18,10 +18,10 @@ export default function LoginPage() {
     try {
       const res = await api.login(email, password);
       setAuth(res);
-      notify('✅ Logged in successfully!', 'success');
+      notify('Welcome back!', 'success');
       navigate('/notes');
     } catch (err) {
-      notify(`❌ ${err.message}`, 'error');
+      notify(`Login failed: ${err.message}`, 'error');
     } finally {
       setLoading(false);
     }
@@ -30,9 +30,9 @@ export default function LoginPage() {
   async function seed() {
     try {
       const r = await api.seed();
-      notify('🌱 Test accounts created successfully!', 'success');
+      notify('Demo accounts created successfully', 'success');
     } catch (e) {
-      notify(`❌ Seed failed: ${e.message}`, 'error');
+      notify(`Setup failed: ${e.message}`, 'error');
     }
   }
 
@@ -43,19 +43,19 @@ export default function LoginPage() {
         <div className="max-w-md w-full">
           <form onSubmit={onSubmit} className="card space-y-6">
             <div className="text-center">
-              <h1 className="text-2xl font-bold text-slate-900">Welcome Back</h1>
-              <p className="text-slate-600 mt-2">Sign in to your account</p>
+              <h1 className="text-2xl font-bold text-slate-900">Sign In</h1>
+              <p className="text-slate-600 mt-2">Access your workspace</p>
             </div>
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
                 <input 
                   className="input" 
                   type="email" 
                   value={email} 
                   onChange={(e)=>setEmail(e.target.value)} 
-                  placeholder="Enter your email"
+                  placeholder="your.email@company.com"
                   required 
                 />
               </div>
@@ -66,7 +66,7 @@ export default function LoginPage() {
                   type="password" 
                   value={password} 
                   onChange={(e)=>setPassword(e.target.value)} 
-                  placeholder="Enter your password"
+                  placeholder="Enter password"
                   required 
                 />
               </div>
@@ -78,7 +78,7 @@ export default function LoginPage() {
                 disabled={loading} 
                 type="submit"
               >
-                {loading ? '🔄 Signing in…' : '🚀 Sign In'}
+                {loading ? 'Signing in...' : 'Sign In'}
               </button>
               
               <button 
@@ -86,13 +86,13 @@ export default function LoginPage() {
                 type="button" 
                 onClick={seed}
               >
-                🌱 Seed Test Accounts
+                Setup Demo Data
               </button>
             </div>
             
             <div className="text-center">
               <p className="text-xs text-slate-500 bg-blue-50 p-3 rounded border border-blue-200">
-                💡 Try <strong>admin@acme.test</strong> with password <strong>password</strong>
+                Try <strong>admin@acme.test</strong> with <strong>password</strong>
               </p>
             </div>
           </form>
