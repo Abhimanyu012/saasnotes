@@ -15,6 +15,7 @@ const corsOptions = {
     'http://localhost:3000',
     'https://saasfrontend-pied.vercel.app',
     'https://saasfrontend-464kechul-abhimanyukumars-projects.vercel.app',
+    'https://saasfrontend-gm0yp2zvz-abhimanyukumars-projects.vercel.app',
     'https://notes-frontend-abhimanyukumars-projects.vercel.app',
     'https://notes-frontend.vercel.app'
   ],
