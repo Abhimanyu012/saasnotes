@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "description": "Multi-tenant SaaS Notes App Backend (MERN)",
   "main": "server.js",
+  "engines": {
+    "node": ">=18.x"
+  },
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
     "build": "echo 'No build step required for Node.js'",
     "test": "echo 'Tests not implemented yet'",
     "lint": "eslint src/",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "vercel-build": "echo 'No build step for serverless'"
   },
   "dependencies": {
     "express": "^4.18.2",

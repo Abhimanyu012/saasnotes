@@ -35,7 +35,8 @@ const seedData = async (req, res) => {
     }
     res.json({ status: 'seeded', message: 'Test accounts created successfully' });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('Seed Error:', err);
+    res.status(500).json({ error: err.message, stack: err.stack });
   }
 };
 
@@ -74,7 +75,8 @@ const login = async (req, res) => {
       }
     });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('Login Error:', err);
+    res.status(500).json({ error: err.message, stack: err.stack });
   }
 };
 
