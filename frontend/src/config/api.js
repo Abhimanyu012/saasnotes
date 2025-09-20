@@ -3,7 +3,7 @@
 
 export const API_BASE_URL = process.env.NODE_ENV === 'production' 
   ? process.env.VITE_API_URL || 'https://backend-gbcpmv0ai-abhimanyukumars-projects.vercel.app'
-  : 'http://localhost:5000';
+  : '';
 
 export const API_ENDPOINTS = {
   // Authentication
