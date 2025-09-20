@@ -1,8 +1,10 @@
 // API Configuration
 // Handles different API base URLs for development and production
 
+// For development, use Vite proxy (empty string)
+// For production, use environment variable or fallback
 export const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? process.env.VITE_API_URL || 'https://backend-dhtmf30fm-abhimanyukumars-projects.vercel.app'
+  ? import.meta.env.VITE_API_URL || 'https://notesbackend-psi.vercel.app'
   : '';
 
 export const API_ENDPOINTS = {
