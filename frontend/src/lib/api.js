@@ -1,7 +1,7 @@
 import { getToken, getTenantSlug } from './auth';
 import { API_BASE_URL } from '../config/api';
 
-const BASE = import.meta.env.VITE_API_BASE || `${API_BASE_URL}/api`;
+const BASE = import.meta.env.VITE_API_URL || API_BASE_URL;
 
 async function request(path, { method = 'GET', body, headers } = {}) {
   const res = await fetch(`${BASE}${path}`, {
@@ -24,17 +24,17 @@ async function request(path, { method = 'GET', body, headers } = {}) {
 
 // Auth
 export const api = {
-  login: (email, password) => request('/auth/login', { method: 'POST', body: { email, password } }),
-  seed: () => request('/auth/seed'),
+  login: (email, password) => request('/api/auth/login', { method: 'POST', body: { email, password } }),
+  seed: () => request('/api/auth/seed'),
   // Health
-  health: () => request('/health'),
+  health: () => request('/api/health'),
   // Notes
-  listNotes: () => request('/notes'),
-  createNote: (note) => request('/notes', { method: 'POST', body: note }),
-  updateNote: (id, note) => request(`/notes/${id}`, { method: 'PUT', body: note }),
-  deleteNote: (id) => request(`/notes/${id}`, { method: 'DELETE' }),
+  listNotes: () => request('/api/notes'),
+  createNote: (note) => request('/api/notes', { method: 'POST', body: note }),
+  updateNote: (id, note) => request(`/api/notes/${id}`, { method: 'PUT', body: note }),
+  deleteNote: (id) => request(`/api/notes/${id}`, { method: 'DELETE' }),
   // Tenant
-  upgradeTenant: (slug) => request(`/tenants/${slug}/upgrade`, { method: 'POST' }),
+  upgradeTenant: (slug) => request(`/api/tenants/${slug}/upgrade`, { method: 'POST' }),
 };
 
 export default api;
