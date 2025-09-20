@@ -1,6 +1,7 @@
 import { getToken, getTenantSlug } from './auth';
+import { API_BASE_URL } from '../config/api';
 
-const BASE = import.meta.env.VITE_API_BASE || '/api';
+const BASE = import.meta.env.VITE_API_BASE || `${API_BASE_URL}/api`;
 
 async function request(path, { method = 'GET', body, headers } = {}) {
   const res = await fetch(`${BASE}${path}`, {
