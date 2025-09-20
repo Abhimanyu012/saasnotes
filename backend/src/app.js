@@ -22,6 +22,8 @@ const corsOptions = {
       'https://saasfrontend-gm0yp2zvz-abhimanyukumars-projects.vercel.app',
       'https://notes-frontend-abhimanyukumars-projects.vercel.app',
       'https://notes-frontend.vercel.app',
+      'https://frontend-9bxgaojy0-abhimanyukumars-projects.vercel.app',
+      'https://frontend-five-azure-57.vercel.app',
       // All frontend aliases and deployments
       'https://frontend-five-azure-57.vercel.app',
       'https://frontend-abhimanyukumars-projects.vercel.app',
